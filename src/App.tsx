@@ -806,9 +806,9 @@ function App() {
             style={{
               backgroundColor: 'var(--bg-white)',
               borderRadius: 'var(--radius-lg)',
-              maxWidth: '520px',
+              maxWidth: '440px',
               width: '100%',
-              padding: '40px',
+              padding: '24px',
               border: '1px solid rgba(226, 232, 240, 0.8)',
               boxShadow: 'var(--shadow-lg)',
               animation: 'fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
@@ -820,29 +820,29 @@ function App() {
             {/* Success Icon */}
             <div
               style={{
-                width: '72px',
-                height: '72px',
+                width: '48px',
+                height: '48px',
                 borderRadius: '50%',
                 backgroundColor: 'var(--accent-gold-light)',
                 color: 'var(--accent-gold)',
-                fontSize: '36px',
+                fontSize: '24px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                margin: '0 auto 24px auto',
+                margin: '0 auto 12px auto',
               }}
             >
               ✓
             </div>
 
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '28px', fontWeight: 800, color: 'var(--primary-color)', marginBottom: '8px' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '22px', fontWeight: 800, color: 'var(--primary-color)', marginBottom: '4px' }}>
               Order Placed Successfully!
             </h3>
-            <p style={{ fontSize: '13px', color: 'var(--accent-gold)', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '20px' }}>
-              Order Reference ID: {placedOrder.orderId}
+            <p style={{ fontSize: '11px', color: 'var(--accent-gold)', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '12px' }}>
+              Reference ID: {placedOrder.orderId}
             </p>
-            <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: '24px' }}>
-              Thank you, *${placedOrder.name}*! Your order has been registered in our system. A representative will contact you at *${placedOrder.phone}* shortly to verify your order and dispatch details.
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.4, marginBottom: '16px' }}>
+              Thank you, <strong>{placedOrder.name}</strong>! Your order is registered. We will contact you at <strong>{placedOrder.phone}</strong> shortly to verify shipping details.
             </p>
 
             {/* Order summary info */}
@@ -851,36 +851,36 @@ function App() {
                 backgroundColor: 'var(--bg-offwhite)',
                 border: '1px solid var(--border-color)',
                 borderRadius: 'var(--radius-sm)',
-                padding: '16px',
-                marginBottom: '28px',
+                padding: '12px',
+                marginBottom: '16px',
                 textAlign: 'left',
               }}
             >
-              <h5 style={{ fontSize: '12px', fontWeight: 700, color: 'var(--primary-color)', textTransform: 'uppercase', marginBottom: '10px' }}>
+              <h5 style={{ fontSize: '11px', fontWeight: 700, color: 'var(--primary-color)', textTransform: 'uppercase', marginBottom: '8px' }}>
                 Order Summary
               </h5>
-              <div style={{ fontSize: '13px', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span>Total Amount Due:</span>
+                  <span>Total Amount:</span>
                   <span style={{ fontWeight: 700, color: 'var(--primary-color)' }}>{formatPrice(placedOrder.total)}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span>Payment Method:</span>
+                  <span>Payment:</span>
                   <span style={{ fontWeight: 700, color: 'var(--primary-color)' }}>
                     {placedOrder.payment === 'COD' ? 'Cash on Delivery' : 'Bank Transfer'}
                   </span>
                 </div>
-                <div style={{ borderTop: '1px dashed var(--border-color)', marginTop: '6px', paddingTop: '6px' }}>
-                  <span style={{ display: 'block', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '4px' }}>
-                    Shipping Address:
+                <div style={{ borderTop: '1px dashed var(--border-color)', marginTop: '4px', paddingTop: '4px' }}>
+                  <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-light)', marginBottom: '2px' }}>
+                    Address:
                   </span>
-                  <span style={{ fontSize: '12px', color: 'var(--primary-color)' }}>{placedOrder.address}</span>
+                  <span style={{ fontSize: '11px', color: 'var(--primary-color)' }}>{placedOrder.address}</span>
                 </div>
               </div>
             </div>
 
             {/* Action buttons */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <a
                 href={getWhatsAppOrderLink(placedOrder)}
                 target="_blank"
@@ -888,21 +888,22 @@ function App() {
                 className="btn-primary"
                 style={{
                   justifyContent: 'center',
-                  padding: '14px',
+                  padding: '12px',
                   backgroundColor: '#25D366',
-                  boxShadow: '0 6px 15px rgba(37, 211, 102, 0.25)',
+                  boxShadow: '0 4px 10px rgba(37, 211, 102, 0.2)',
+                  fontSize: '13px',
                 }}
                 onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#128C7E')}
                 onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#25D366')}
               >
-                Send Order details to WhatsApp
+                Send Details to WhatsApp
               </a>
               <button
                 onClick={() => setPlacedOrder(null)}
                 className="btn-outline"
-                style={{ justifyContent: 'center', padding: '14px' }}
+                style={{ justifyContent: 'center', padding: '12px', fontSize: '13px' }}
               >
-                Close & Continue Shopping
+                Close & Continue
               </button>
             </div>
           </div>
