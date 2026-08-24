@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
+  cartItemCount: number;
+  onCartToggle: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartItemCount, onCartToggle }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -36,11 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'py-3 bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100'
-            : 'py-6 bg-transparent'
-        }`}
+        className="fixed top-0 left-0 w-full z-50 transition-all duration-500"
         style={{
           position: 'fixed',
           top: 0,
@@ -128,12 +126,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
               .nav-item:hover::after {
                 width: 100%;
               }
-              .nav-item-active {
-                color: var(--secondary-color) !important;
-              }
-              .nav-item-active::after {
-                width: 100% !important;
-              }
             `}</style>
             {navLinks.map((link) => (
               <a
@@ -150,7 +142,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             ))}
           </div>
 
-          {/* Desktop CTA Button */}
+          {/* Desktop Actions Area */}
           <div className="hidden md:block" style={{ display: 'none' }}>
             <style>{`
               @media (min-width: 768px) {
@@ -159,51 +151,87 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                 }
               }
             `}</style>
-            <button
-              onClick={() => handleLinkClick('products')}
-              className="btn-primary"
-              style={{
-                padding: isScrolled ? '10px 22px' : '14px 28px',
-                fontSize: '14px',
-              }}
-            >
-              Shop Now
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+              {/* Desktop Cart Button */}
+              <button
+                onClick={onCartToggle}
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--secondary-light)',
+                  color: 'var(--primary-color)',
+                  border: '1px solid rgba(75, 112, 245, 0.1)',
+                  transition: 'var(--transition-fast)',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--primary-color)';
+                  e.currentTarget.style.color = 'var(--text-white)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--secondary-light)';
+                  e.currentTarget.style.color = 'var(--primary-color)';
+                }}
+                aria-label="View Cart"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                {cartItemCount > 0 && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: '-4px',
+                      right: '-4px',
+                      backgroundColor: 'var(--accent-gold)',
+                      color: 'var(--primary-color)',
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      borderRadius: '50%',
+                      width: '18px',
+                      height: '18px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: 'var(--shadow-sm)',
+                    }}
+                  >
+                    {cartItemCount}
+                  </span>
+                )}
+              </button>
+
+              <button
+                onClick={() => handleLinkClick('products')}
+                className="btn-primary"
+                style={{
+                  padding: isScrolled ? '10px 22px' : '14px 28px',
+                  fontSize: '14px',
+                }}
+              >
+                Shop Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
           </div>
 
-          {/* Mobile Hamburger Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden"
-            aria-label="Toggle Menu"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '6px',
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              backgroundColor: isScrolled ? 'var(--secondary-light)' : 'rgba(255, 255, 255, 0.9)',
-              border: 'none',
-              transition: 'var(--transition-fast)',
-            }}
-          >
+          {/* Mobile Actions Container */}
+          <div className="md:hidden" style={{ display: 'none' }}>
             <style>{`
-              @media (min-width: 768px) {
+              @media (max-width: 767px) {
                 .md\\:hidden {
-                  display: none !important;
+                  display: flex !important;
+                  align-items: center;
+                  gap: 12px;
                 }
-              }
-              .burger-bar {
-                width: 18px;
-                height: 2px;
-                background-color: var(--primary-color);
-                transition: var(--transition-smooth);
               }
               .burger-open-1 {
                 transform: translateY(8px) rotate(45deg);
@@ -214,11 +242,83 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
               .burger-open-3 {
                 transform: translateY(-8px) rotate(-45deg);
               }
+              .burger-bar {
+                width: 18px;
+                height: 2px;
+                background-color: var(--primary-color);
+                transition: var(--transition-smooth);
+              }
             `}</style>
-            <div className={`burger-bar ${isMobileMenuOpen ? 'burger-open-1' : ''}`} style={{ transformOrigin: 'center' }} />
-            <div className={`burger-bar ${isMobileMenuOpen ? 'burger-open-2' : ''}`} />
-            <div className={`burger-bar ${isMobileMenuOpen ? 'burger-open-3' : ''}`} style={{ transformOrigin: 'center' }} />
-          </button>
+            
+            {/* Mobile Cart Button */}
+            <button
+              onClick={onCartToggle}
+              style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--secondary-light)',
+                color: 'var(--primary-color)',
+                border: 'none',
+                transition: 'var(--transition-fast)',
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              {cartItemCount > 0 && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: '-3px',
+                    right: '-3px',
+                    backgroundColor: 'var(--accent-gold)',
+                    color: 'var(--primary-color)',
+                    fontSize: '9px',
+                    fontWeight: 800,
+                    borderRadius: '50%',
+                    width: '15px',
+                    height: '15px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: 'var(--shadow-sm)',
+                  }}
+                >
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
+
+            {/* Mobile Hamburger Menu Toggle */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Menu"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '6px',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                backgroundColor: isScrolled ? 'var(--secondary-light)' : 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                transition: 'var(--transition-fast)',
+              }}
+            >
+              <div className={`burger-bar ${isMobileMenuOpen ? 'burger-open-1' : ''}`} style={{ transformOrigin: 'center' }} />
+              <div className={`burger-bar ${isMobileMenuOpen ? 'burger-open-2' : ''}`} />
+              <div className={`burger-bar ${isMobileMenuOpen ? 'burger-open-3' : ''}`} style={{ transformOrigin: 'center' }} />
+            </button>
+          </div>
         </div>
       </nav>
 

@@ -4,9 +4,10 @@ import type { Product } from '../data/products';
 interface ProductCardProps {
   product: Product;
   onSelect: (product: Product) => void;
+  onAddToCart: (product: Product) => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, onAddToCart }) => {
   // Format prices as currency (PKR/Rs.)
   const formatPrice = (amount: number) => {
     return `Rs. ${amount.toLocaleString()}`;
@@ -40,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
         .product-img-box {
           position: relative;
           width: 100%;
-          padding-top: 85%; /* Aspect ratio of card image */
+          padding-top: 85%;
           background-color: var(--bg-offwhite);
           overflow: hidden;
           border-bottom: 1px solid rgba(226, 232, 240, 0.5);
@@ -87,25 +88,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
           border-radius: 20px;
           z-index: 10;
         }
-        .product-card-button {
-          margin-top: auto;
-          width: 100%;
-          background-color: var(--secondary-light);
-          color: var(--secondary-color);
-          font-weight: 700;
-          font-size: 14px;
+        .action-btn {
           padding: 12px;
+          font-size: 13px;
+          font-weight: 700;
           border-radius: var(--radius-sm);
-          text-align: center;
+          transition: var(--transition-smooth);
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
-          transition: var(--transition-smooth);
-        }
-        .product-card:hover .product-card-button {
-          background-color: var(--primary-color);
-          color: var(--text-white);
         }
       `}</style>
 
@@ -217,16 +209,54 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
           )}
         </div>
 
-        {/* CTA Button */}
-        <button
-          onClick={() => onSelect(product)}
-          className="product-card-button"
-        >
-          View Details
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </button>
+        {/* Action Button Row */}
+        <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
+          <button
+            onClick={() => onSelect(product)}
+            className="action-btn"
+            style={{
+              flex: 1,
+              backgroundColor: 'var(--secondary-light)',
+              color: 'var(--secondary-color)',
+              border: '1px solid rgba(75, 112, 245, 0.1)',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = '#CBD5E1';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--secondary-light)';
+            }}
+          >
+            Details
+          </button>
+          
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart(product);
+            }}
+            className="action-btn"
+            style={{
+              flex: 1.3,
+              backgroundColor: 'var(--primary-color)',
+              color: 'var(--text-white)',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--secondary-color)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--primary-color)';
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            Add to Cart
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -4,12 +4,14 @@ import { ProductCard } from './ProductCard';
 
 interface ProductGridProps {
   onSelectProduct: (product: Product) => void;
+  onAddToCart: (product: Product) => void;
   selectedCategory: string;
   onSelectCategory: (category: string) => void;
 }
 
 export const ProductGrid: React.FC<ProductGridProps> = ({
   onSelectProduct,
+  onAddToCart,
   selectedCategory,
   onSelectCategory,
 }) => {
@@ -141,6 +143,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                 <ProductCard
                   product={product}
                   onSelect={onSelectProduct}
+                  onAddToCart={onAddToCart}
                 />
               </div>
             ))}
