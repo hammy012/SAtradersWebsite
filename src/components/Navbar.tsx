@@ -62,7 +62,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'between',
             justifyContent: 'space-between',
           }}
         >

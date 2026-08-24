@@ -9,7 +9,7 @@ import { PremiumShowcase } from './components/PremiumShowcase';
 import { About } from './components/About';
 import { CTASection } from './components/CTASection';
 import { Footer } from './components/Footer';
-import { Product } from './data/products';
+import type { Product } from './data/products';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Product, products } from '../data/products';
+import { type Product, products } from '../data/products';
 
 interface ProductCarouselProps {
   onSelectProduct: (product: Product) => void;
@@ -11,7 +11,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ onSelectProduc
   const [isHovered, setIsHovered] = useState(false);
   const touchStart = useRef<number | null>(null);
   const touchEnd = useRef<number | null>(null);
-  const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
+  const autoplayTimer = useRef<any>(null);
 
   // Update visible slides count on resize
   useEffect(() => {
