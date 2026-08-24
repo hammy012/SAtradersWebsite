@@ -90,7 +90,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onFilterCategory }) 
 
           {/* Column 1: Brand Info */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 src="/assets/sa_logo.png"
                 alt="SA TRADER'S Logo"
@@ -100,31 +100,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onFilterCategory }) 
                   objectFit: 'contain',
                 }}
               />
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '20px',
-                    fontWeight: 800,
-                    letterSpacing: '1px',
-                    lineHeight: 1.1,
-                  }}
-                >
-                  SA TRADER'S
-                </span>
-                <span
-                  style={{
-                    fontSize: '8px',
-                    fontWeight: 700,
-                    color: 'var(--accent-gold)',
-                    letterSpacing: '1.5px',
-                    textTransform: 'uppercase',
-                    marginTop: '2px',
-                  }}
-                >
-                  Quality Products Better Living
-                </span>
-              </div>
             </div>
             <p
               style={{

@@ -75,7 +75,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '12px',
             }}
           >
             <img
@@ -88,33 +87,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                 transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
             />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: isScrolled ? '18px' : '22px',
-                  fontWeight: 800,
-                  color: 'var(--primary-color)',
-                  letterSpacing: '1px',
-                  lineHeight: 1.1,
-                  transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-                }}
-              >
-                SA TRADER'S
-              </span>
-              <span
-                style={{
-                  fontSize: '8px',
-                  fontWeight: 700,
-                  color: 'var(--accent-gold)',
-                  letterSpacing: '1.5px',
-                  textTransform: 'uppercase',
-                  marginTop: '2px',
-                }}
-              >
-                Quality Products Better Living
-              </span>
-            </div>
           </a>
 
           {/* Desktop Navigation Link */}
