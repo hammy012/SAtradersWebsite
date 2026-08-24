@@ -37,9 +37,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onFilterCategory }) 
         <div
           className="footer-grid"
           style={{
-            display: 'grid',
-            gridTemplateColumns: '2fr 1fr 1fr 1.5fr',
-            gap: '50px',
             marginBottom: '60px',
           }}
         >

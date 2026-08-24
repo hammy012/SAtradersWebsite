@@ -18,12 +18,6 @@ export const PremiumShowcase: React.FC<PremiumShowcaseProps> = ({ onNavigate }) 
       <div className="container">
         <div
           className="showcase-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            alignItems: 'center',
-            gap: '60px',
-          }}
         >
           <style>{`
             .showcase-grid {

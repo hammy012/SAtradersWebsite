@@ -52,12 +52,6 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div
           className="hero-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            alignItems: 'center',
-            gap: '60px',
-          }}
         >
           <style>{`
             .hero-grid {
@@ -76,7 +70,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                 order: 2;
               }
               .hero-image-area {
-                order: 1;
+                display: none !important;
               }
             }
           `}</style>

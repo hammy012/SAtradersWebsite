@@ -15,12 +15,6 @@ export const About: React.FC = () => {
       <div className="container">
         <div
           className="about-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            alignItems: 'center',
-            gap: '60px',
-          }}
         >
           <style>{`
             .about-grid {

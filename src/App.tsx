@@ -14,9 +14,20 @@ import type { Product } from './data/products';
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Preloader Timer Hook
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Scroll Reveal Animation Hook
   useEffect(() => {
+    if (isLoading) return;
+
     const handleScrollReveal = () => {
       const reveals = document.querySelectorAll('.reveal-on-scroll');
       reveals.forEach((element) => {
@@ -30,11 +41,14 @@ function App() {
     };
 
     // Run once on load to show elements already visible
-    setTimeout(handleScrollReveal, 100);
+    const timer = setTimeout(handleScrollReveal, 100);
 
     window.addEventListener('scroll', handleScrollReveal);
-    return () => window.removeEventListener('scroll', handleScrollReveal);
-  }, []);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScrollReveal);
+    };
+  }, [isLoading]);
 
   const navigateToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -70,6 +84,38 @@ function App() {
     const message = `Hi SA TRADER'S, I would like to order: *${productName}* (${formatPrice(price)}). Please provide payment and shipping information.`;
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   };
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: 'var(--primary-color)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '24px',
+          zIndex: 9999,
+          color: 'var(--text-white)',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h2 style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-white)', letterSpacing: '1px', fontWeight: 800 }}>
+            SA TRADER'S
+          </h2>
+          <span style={{ fontSize: '10px', color: 'var(--accent-gold)', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginTop: '4px' }}>
+            Quality Products Better Living
+          </span>
+        </div>
+        <div className="preloader-spinner" />
+      </div>
+    );
+  }
 
   return (
     <>

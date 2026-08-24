@@ -40,6 +40,7 @@
   
   /* Easing and Transitions */
   --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.2s ease;
   
   scroll-behavior: smooth;
@@ -102,6 +103,76 @@ button {
 
 .text-center {
   text-align: center;
+}
+
+/* Responsive Grids (Replacing inline styles to support media queries) */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 50px;
+}
+
+/* Mobile Media Queries for Grids */
+@media (max-width: 991px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 40px;
+  }
+  
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px;
+  }
+  
+  .showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr !important;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px;
+  }
 }
 
 /* Section Header Typography */
@@ -263,17 +334,25 @@ button {
   animation: float-delayed 8s ease-in-out infinite;
 }
 
-/* Scroll Animation classes */
+/* Slow scroll-triggered animations with delays */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .reveal-on-scroll.revealed {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Delay classes for staggered animation */
+.delay-100 { transition-delay: 100ms !important; }
+.delay-200 { transition-delay: 200ms !important; }
+.delay-300 { transition-delay: 300ms !important; }
+.delay-400 { transition-delay: 400ms !important; }
+.delay-500 { transition-delay: 500ms !important; }
 
 /* Hover Zoom effect */
 .hover-zoom-container {
@@ -287,6 +366,21 @@ button {
 
 .hover-zoom-container:hover .hover-zoom-img {
   transform: scale(1.05);
+}
+
+/* Preloader Spinner Animation */
+@keyframes spinGold {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.preloader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(212, 175, 55, 0.1);
+  border-top-color: var(--accent-gold);
+  border-radius: 50%;
+  animation: spinGold 1s linear infinite;
 }
 
 /* Scrollbar Style */

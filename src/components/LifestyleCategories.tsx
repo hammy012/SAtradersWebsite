@@ -82,11 +82,6 @@ export const LifestyleCategories: React.FC<LifestyleCategoriesProps> = ({ onSele
         {/* Categories Grid Layout */}
         <div
           className="categories-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '30px',
-          }}
         >
           <style>{`
             .categories-grid {

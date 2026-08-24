@@ -125,7 +125,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ onSelectProduc
             className="carousel-track"
             style={{
               display: 'flex',
-              transform: `translateX(-${currentIndex * (100 / visibleSlides)}%)`,
+              transform: `translateX(-${currentIndex * (100 / totalSlides)}%)`,
               transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
               width: `${(totalSlides / visibleSlides) * 100}%`,
             }}
